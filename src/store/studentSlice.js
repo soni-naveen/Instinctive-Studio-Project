@@ -26,12 +26,7 @@ const studentsSlice = createSlice({
   },
 });
 
-export const {
-  setStudents,
-  setLoading,
-  addStudent,
-  updateStudent,
-  deleteStudent,
-} = studentsSlice.actions;
+export const { setStudents, setLoading, addStudent, deleteStudent } =
+  studentsSlice.actions;
 
 export default studentsSlice.reducer;

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import supabase from "../services/supabaseClient";
 import { setStudents } from "../store/studentSlice";
 import AddStudentForm from "./AddStudentForm";
+import EditStudentForm from "./EditStudentForm";
 
 export default function StudentTable() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function StudentTable() {
   const students = useSelector((state) => state.students.students);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
 
   const fetchStudents = async () => {
     try {
@@ -67,6 +69,14 @@ export default function StudentTable() {
             </button>
           </div>
           {showForm && <AddStudentForm onClose={() => setShowForm(false)} />}
+          {editingStudent && (
+            <EditStudentForm
+              student={editingStudent}
+              isOpen={!!editingStudent}
+              onClose={() => setEditingStudent(null)}
+              onStudentUpdated={fetchStudents}
+            />
+          )}
           <div className="overflow-x-auto mt-4 text-xs sm:text-base">
             <table className="w-full border-collapse">
               <thead>
@@ -77,6 +87,7 @@ export default function StudentTable() {
                   <th className="p-2 text-left">Date Joined</th>
                   <th className="p-2 text-left">Last Login</th>
                   <th className="p-2 text-center">Status</th>
+                  <th className="p-2 text-center">Update</th>
                 </tr>
               </thead>
               <tbody>
@@ -131,6 +142,14 @@ export default function StudentTable() {
                             : "bg-red-500"
                         }`}
                       ></span>
+                    </td>
+                    <td className="p-2">
+                      <button
+                        onClick={() => setEditingStudent(student)}
+                        className="bg-yellow-200 py-1 px-2 text-sm rounded"
+                      >
+                        Edit
+                      </button>
                     </td>
                   </tr>
                 ))}

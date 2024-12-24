@@ -17,7 +17,7 @@ const Register = () => {
     setEmail("");
     setPassword("");
     alert("Registration successful!");
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
