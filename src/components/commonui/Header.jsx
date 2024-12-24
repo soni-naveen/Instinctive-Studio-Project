@@ -46,7 +46,7 @@ export default function Header() {
             className="w-6 h-6 xl:w-8 xl:h-8 rounded-md"
           />
           <div className="text-sm sm:text-base text-black font-medium">
-            Adeline H. Dancy
+            {localStorage.getItem("name")}
           </div>
         </div>
       </div>

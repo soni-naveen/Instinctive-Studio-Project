@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import supabase from "../services/supabaseClient";
 import { setStudents } from "../store/studentSlice";
@@ -7,6 +8,7 @@ import AddStudentForm from "./AddStudentForm";
 
 export default function StudentTable() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const students = useSelector((state) => state.students.students);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -38,6 +40,10 @@ export default function StudentTable() {
   useEffect(() => {
     fetchStudents();
   }, [dispatch]);
+
+  if (localStorage.getItem("name") === null) {
+    navigate("/register");
+  }
 
   return (
     <>

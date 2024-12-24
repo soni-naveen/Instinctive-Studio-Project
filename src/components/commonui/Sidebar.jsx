@@ -8,6 +8,11 @@ import { COMMON_SIDEBAR } from "../../utils/index";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    window.location.href = "/register";
+  };
 
   return (
     <div>
@@ -35,12 +40,15 @@ export default function Sidebar() {
         </div>
         <div className="flex flex-col gap-0.5 pt-2 border-t border-gray-300">
           <Link to="/register">
-            <div className="flex items-center gap-3 font-semibold px-3 py-2 hover:no-underline hover:bg-[#EEEEEE] rounded-sm text-base cursor-pointer text-red-500">
+            <button
+              onClick={() => handleLogout()}
+              className="flex items-center gap-3 font-semibold px-3 py-2 hover:no-underline hover:bg-[#EEEEEE] rounded-sm text-base cursor-pointer text-red-500"
+            >
               <span className="text-xl">
                 <HiOutlineLogout />
               </span>
               Logout
-            </div>
+            </button>
           </Link>
         </div>
       </div>
